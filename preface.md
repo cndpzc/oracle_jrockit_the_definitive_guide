@@ -43,6 +43,7 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 * **[第8章 运行时分析器][8]**    第8章对JRockit运行时分析器（JRockit Runtime Analyzer, JRA）进行了简单介绍。JRA是一款可以按需定制的分析框架，用于对JRockit以及运行在其中的应用程序的执行状况做记录，以便进行离线分析。具体的记录内容包括方法、锁、垃圾回收器、优化信息、对象统计，以及延迟事件等信息。得到这些记录信息后，就可以针对问题进行离线分析了。
 * **[第9章 Flight Recorder][9]** 第9章对飞行记录仪（JRockit Flight Recorder，JFR）进行了讲解。JFR是新版本JRockit Mission Control套件中对JRA升级。在该章中，详细介绍了JFR的功能，与JRA的区别，以及如何扩展JFR。
 * **[第10章 Memory Leak Detector][10]** 在该章中对JRockit Mission Control套件中的最后一个工具JRockit Memory Leak Detector进行介绍。具体来说，在该章中，介绍了内存泄漏的概念，Memory Leak Detector的适用场景和内部实现。
+* **[第11章 JRCMD][11]** 该章堆命令行工具JRCMD进行了介绍。通过JRCMD，用户可以操作本机上所有的JVM。在该章用，按字母表顺序列出了JRCMD中最重要的诊断命令，并通过示例讲解介绍了如何使用这些命令。
 
 
 
@@ -63,3 +64,4 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 [8]:    ./chap8/8.md#8      "第8章：运行时分析器"
 [9]:    ./chap9/9.md#9      "第9章：飞行记录仪"
 [10]:   ./chap10/10.md#10   "第10章：Memory Leak Detector"
+[11]:   ./chap11/11.md#11   "第11章：JRCMD"

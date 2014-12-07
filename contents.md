@@ -317,6 +317,46 @@
     * [10.7 追踪内存分配][315]
     * [10.8 问题排查][316]
     * [10.9 小结][317]
+* [11 JRCMD][318]
+    * [11.1 介绍][319]
+    * [11.2 覆盖`SIGQUIT`信号处理句柄][320]
+        * [11.2.1 特殊命令][321]
+    * [11.3 JRCMD的限制][322]
+    * [11.4 JRCMD命令参考][323]
+        * [11.4.1 check_flightrecording (R28)][324]
+        * [11.4.2 checkjrarecording (R28)][325]
+        * [11.4.3 command_line][326]
+        * [11.4.4 dump_flightrecording (R28)][327]
+        * [11.4.5 heap_diagnostics (R28)][328]
+        * [11.4.6 hprofdump (R28)][329]
+        * [11.4.7 kill_management_server][330]
+        * [11.4.8 list_vmflags (R28)][331]
+        * [11.4.9 lockprofile_print][332]
+        * [11.4.10 lockprofile_reset][333]
+        * [11.4.11 memleakserver][334]
+        * [11.4.12 oom_diagnostics (R27)][335]
+        * [11.4.13 print_class_summary][336]
+        * [11.4.14 print_codegen_list][337]
+        * [11.4.15 print_memusage (R27)][338]
+        * [11.4.16 print_memusage (R28)][339]
+        * [11.4.17 print_object_summary][340]
+        * [11.4.18 print_properties][341]
+        * [11.4.19 print_threads][342]
+        * [11.4.20 print_utf8pool][343]
+        * [11.4.21 print_vm_state][344]
+        * [11.4.22 run_optfile (R27)][345]
+        * [11.4.23 run_optfile (R28)][346]
+        * [11.4.24 runfinalization][347]
+        * [11.4.25 runsystemgc][348]
+        * [11.4.26 set_vmflag (R28)][349]
+        * [11.4.27 start_flightrecording (R28)][350]
+        * [11.4.28 start_management_server][351]
+        * [11.4.29 startjrarecording (R27)][352]
+        * [11.4.30 stop_flightrecording (R28)][353]
+        * [11.4.31 timestamp][354]
+        * [11.4.32 verbosity][355]
+        * [11.4.33 version][356]
+    * [11.5 小结][357]
 
 
 
@@ -641,3 +681,43 @@
 [315]:  ./chap10/10.7.md#10.7             "10.7 追踪内存分配"
 [316]:  ./chap10/10.8.md#10.8             "10.8 问题排查"
 [317]:  ./chap10/10.9.md#10.9             "10.9 小结"
+[318]:  ./chap11/11.md#11                 "11 JRCMD"
+[319]:  ./chap11/11.1.md#11.1             "11.1 介绍"
+[320]:  ./chap11/11.2.md#11.2             "11.2 覆盖`SIGQUIT`信号处理句柄"
+[321]:  ./chap11/11.2.md#11.2.1           "11.2.1 特殊命令"
+[322]:  ./chap11/11.3.md#11.3             "11.3 JRCMD的限制"
+[323]:  ./chap11/11.4.md#11.4             "11.4 JRCMD命令参考"
+[324]:  ./chap11/11.4.md#11.4.1           "11.4.1 check_flightrecording (R28)"
+[325]:  ./chap11/11.4.md#11.4.2           "11.4.2 checkjrarecording (R28)"
+[326]:  ./chap11/11.4.md#11.4.3           "11.4.3 command_line"
+[327]:  ./chap11/11.4.md#11.4.4           "11.4.4 dump_flightrecording (R28)"
+[328]:  ./chap11/11.4.md#11.4.5           "11.4.5 heap_diagnostics (R28)"
+[329]:  ./chap11/11.4.md#11.4.6           "11.4.6 hprofdump (R28)"      
+[330]:  ./chap11/11.4.md#11.4.7           "11.4.7 kill_management_server"
+[331]:  ./chap11/11.4.md#11.4.8           "11.4.8 list_vmflags (R28)"
+[332]:  ./chap11/11.4.md#11.4.9           "11.4.9 lockprofile_print"
+[333]:  ./chap11/11.4.md#11.4.10          "11.4.10 lockprofile_reset"
+[334]:  ./chap11/11.4.md#11.4.11          "11.4.11 memleakserver"
+[335]:  ./chap11/11.4.md#11.4.12          "11.4.12 oom_diagnostics (R27)"
+[336]:  ./chap11/11.4.md#11.4.13          "11.4.13 print_class_summary"
+[337]:  ./chap11/11.4.md#11.4.14          "11.4.14 print_codegen_list"
+[338]:  ./chap11/11.4.md#11.4.15          "11.4.15 print_memusage (R27)"
+[339]:  ./chap11/11.4.md#11.4.16          "11.4.16 print_memusage (R28)"
+[340]:  ./chap11/11.4.md#11.4.17          "11.4.17 print_object_summary"
+[341]:  ./chap11/11.4.md#11.4.18          "11.4.18 print_properties"
+[342]:  ./chap11/11.4.md#11.4.19          "11.4.19 print_threads"
+[343]:  ./chap11/11.4.md#11.4.20          "11.4.20 print_utf8pool"
+[344]:  ./chap11/11.4.md#11.4.21          "11.4.21 print_vm_state"
+[345]:  ./chap11/11.4.md#11.4.22          "11.4.22 run_optfile (R27)"
+[346]:  ./chap11/11.4.md#11.4.23          "11.4.23 run_optfile (R28)"
+[347]:  ./chap11/11.4.md#11.4.24          "11.4.24 runfinalization"
+[348]:  ./chap11/11.4.md#11.4.25          "11.4.25 runsystemgc"
+[349]:  ./chap11/11.4.md#11.4.26          "11.4.26 set_vmflag (R28)"
+[350]:  ./chap11/11.4.md#11.4.27          "11.4.27 start_flightrecording (R28)"
+[351]:  ./chap11/11.4.md#11.4.28          "11.4.28 start_management_server"
+[352]:  ./chap11/11.4.md#11.4.29          "11.4.29 startjrarecording (R27)"
+[353]:  ./chap11/11.4.md#11.4.30          "11.4.30 stop_flightrecording (R28)"
+[354]:  ./chap11/11.4.md#11.4.31          "11.4.31 timestamp"
+[355]:  ./chap11/11.4.md#11.4.32          "11.4.32 verbosity"
+[356]:  ./chap11/11.4.md#11.4.33          "11.4.33 version"
+[357]:  ./chap11/11.5.md#11.5             "11.5 小结"
