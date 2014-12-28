@@ -1,4 +1,4 @@
-<a name="appendix_a_bibliography">
+<a name="appendix_a_bibliography" />
 # 参考文献
 
 * Abuaiadh, Diab, Yoav Ossia, Erez Petrank, and Uri Silbershtein. An efficient parallel heap compaction algorithm. ACM SIGPLAN Notices, 2004.

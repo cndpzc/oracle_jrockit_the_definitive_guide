@@ -1,0 +1,188 @@
+<a name="appendix_b_glossary" />
+# 术语汇编
+
+<a name="AST" />
+## 抽象语法树（abstract syntax tree, AST）
+
+抽象语法树（Abstract Syntax Tree，AST）是一种代码表述形式，如果源代码结构良好，则编译器前端可以根据源代码来生成AST。AST中的每个节点都表示高级语言中的一种结构，例如循环或赋值。AST本身的节点不能出现循环结构。
+
+Java字节码是非结构化的，其表现力也强于Java源代码，有时候没办法通过Java字节码来生成AST，因此，会使用JRockit IR是以图，而非树，的形式来展现的。
+
+>参见[IR][IR]。
+
+<a name="access_file" />
+## 访问文件（access file）
+
+在JMX中，访问文件用于指定不同角色的访问权限。一般情况下，该文件存放于`JROCKIT_HOME/jre/lib/management/jmxremote.access`。
+
+>参见[密码文件][password_file]和[JMX][JMX]
+
+<a name="adaptive_code_generation" />
+## 自适应代码生成（adaptive code generation）
+
+自适应代码生成是指在自适应环境中动态生产代码，例如JIT和混合模式解释执行代码。一般情况下，自适应代码生成会根据运行时反馈信息，对代码做多次优化。JVM是一个自适应环境，可以动态生产代码，而静态编译系统则无法办到。
+
+>参见[JIT][JIT]和[混合模式解释执行][mixed_mode_interpretation]。
+
+<a name="adaptive_memory_management" />
+## 自适应内存管理（adaptive memory management）
+
+自动内存管理是指应用某种自适应内存管理技术（例如垃圾回收器）来管理内存。本书中所指的自适应内存管理是指为了提升性能而根据运行时反馈信息来调整垃圾回收器的行为。
+
+<a name="agent" />
+## 代理（agent）
+
+本书中的代理有两层含义，分别是JMX代理和JFR引擎，具体是哪个需要根据语境来判断。
+
+>参见[JMX][JMX]和[JFR][JFR]。
+
+<a name="ahead_of_time_compilation" />
+## AOT编译（ahead-of-time compilation）
+
+一般来说，AOT编译是指在执行代码之前现对全部或部分进行编译。C++编译器在生成二进制可执行文件时就是这样的。
+
+>参见[JIT][JIT]。
+
+<a name="allocation_profiling" />
+## 内存分配分析（allocation profiling）
+
+JRockit Management Console的一个特性就是运行用户实时查看应用程序中各个线程的内存分配情况。JFR中划分了多种内存分配分析事件，用户可以查看每个线程中每种事件类型的统计数据。
+
+<a name="atomic_instruction" />
+## 原子指令（atomic_instruction）
+
+原子指令在执行时，无论操作对象是什么，指令要么都执行，要么都不执行。根据硬件模型的不同，在执行普通指令时，可能会因弱内存语义而乱序执行，相比之下，原子指令的执行时间通过会比普通指令大几个数量级。大部分CPU架构所支持的[比较并交换][CAS]指令就是一个原子指令。
+
+>参见[比较并交换][CAS]。
+
+<a name="automatic_memory_management" />
+## 自动内存管理（automatic_memory_management）
+
+本书中，自动内存管理是指在运行时系统中使用垃圾回收器来管理内存。
+
+<a name="balloon_driver" />
+## 膨胀驱动程序（balloon driver）
+
+在虚拟环境中，虚拟机管理程序可以使用名为膨胀驱动程序（其具体形式可能会虚拟设备驱动程序）来隐式的与客户应用程序来协商内存使用情况。通过这种机制，客户应用程序对内存的使用请求就可以跨越虚拟抽象层这道屏障，实现内存使用的动态伸缩。
+
+>参见[虚拟化][virtualization] [客户应用程序][guest]和[虚拟机应用程序][hypervisor]。
+
+<a name="basic_block" />
+## 基本块（basic_block）
+
+在编译器的中间表示中，基本块是最小的控制流单元。一般情况下，基本块中会包含0个或多个指令，并且具有"一荣俱荣"的特性，即若是执行了基本块中的某条指令，则肯定会执行该基本块中的所有指令。
+
+>参见[控制流图][control_flow_graph]。
+
+<a name="benchmark_driver" />
+## 基准测试驱动（benchmark driver）
+
+基准测试驱动是指在基准测试中通过一台或多台机器来增加负载，然后在衡量基准测试目标操作的实际执行时间时，再将这部分工作时间排除在外的测试方式。
+
+<a name="biased_locking" />
+## 偏向锁（biased locking）
+
+>参见[延迟解锁][lazy_unlocking]。
+
+<a name="bytecode" />
+## 字节码（bytecode）
+
+字节码是由源代码转化成的、平台无关的二进制表示，就Java来说，字节码由Java源代码编译而成。Java字节码中包含了操作指令（长度为1个字节）和操作数，其结构化程度不如Java源代码，可以任意使用`goto`指令和其他Java源代码中不存在的结构，因此其表现力也远强于Java源代码。
+
+<a name="bytecode_interpertation">
+## 字节码解释执行（bytecode interpretation）
+
+字节码解释执行是指，在虚拟执行栈中，以模拟字节码指令、虚拟机状态和本地变量表的形式来运行字节码代码。字节码解释执行的启动速递比编译执行快，但运行性能较低。
+
+<a name="call_profiling" />
+## 调用分析（call profiling）
+
+调用分析是指在JIT代码中注入特定代码查看方法的调用频率或调用路径。收集到的调用分析主要用于做代码优化，例如找出应该将哪些方法做内联处理。
+
+>参见[自适应代码生成][adaptive_code_generation]和[JIT][JIT]。
+
+<a name="card" />
+## 卡（card）
+
+在本书中， 卡是一中数据结构，用于表示某块堆内存。整个堆内存被划分为多个卡，存储与卡表中。在分代式垃圾回收中，卡表用于判断老年代指定分区是否是脏的（dirty），即该区域中是否有对象包含有指向年轻代中对象的引用。
+
+>参见[写屏障][write_barrier]和[分代式垃圾回收][generational_garbage_collection]。
+
+<a name="card_table" />
+## 卡表（card table）
+
+>参见[卡][card]。
+
+<a name="class_block">
+## 类块（class block）
+
+类块是JRockit中的名词，指对象头中所指向的、包含了类型信息的数据块。
+
+>参见[对象头][object_header]。
+
+<a name="class_garbage_collection" />
+## 类型垃圾回收（class garbage collection）
+
+类型垃圾回收是指JVM对运行时中的类型信息进行清理。如果某个类已经被卸载了，而且没有`java.lang.ClassLoader`实例或其他代码引用该类或其方式时，就可以将其清理掉了。
+
+<a name="client_side_template" />
+## 客户端模板（client-side template）
+
+JRockit Mission Control的客户端模板用于控制运行时记录的事件设置。解析改模板文件时，采用的全解析策略，即不支持通配符。模板文件可以带有版本信息。
+
+>参见[事件设置][event_settings]和[服务器端模板][server_side_template]。
+
+<a name="cloud" />
+## 云（cloud）
+
+云是指集中大量分布式计算资源（可能是虚拟计算资源），用户可以在其中部署自己的应用程序。
+
+>参见[虚拟化][virtualization]。
+
+<a name="code_generation_queue" />
+## 代码生成队列
+
+代码生成队列是JRockit中的一个词儿，为了保证Java应用程序的持续运行，JVM会先将代码生成请求放入到指定队列中，而后代码生成线程会从该队列中获取任务，执行代码生成任务，之后JVM再执行新生成的代码。
+
+>参见[优化队列][optimization_queue]。
+
+
+
+
+[AST]:                              #AST                                "抽象语法树"
+[IR]:                               #IR                                 "中间表示"
+[access_file]:                      #access_file                        "访问文件"
+[password_file]:                    #password_file                      "密码文件"
+[JMX]:                              #JMX                                "JMX"
+[JIT]:                              #JIT                                "JIT"
+[mixed_mode_interpretation]:        #mixed_mode_interpretation          "混合模式解释执行"
+[adaptive_code_generation]:         #adaptive_code_generation           "自适应代码生成"
+[adaptive_memory_management]:       #adaptive_memory_management         "自适应内存管理"
+[agent]:                            #agent                              "代理"
+[JFR]:                              #JFR                                "JRockit Flight Recorder"
+[allocation_profiling]:             #allocation_profiling               "内存分配分析"
+[atomic_instruction]:               #atomic_instruction                 "原子指令"
+[CAS]:                              #CAS                                "比较并交换"
+[automatic_memory_management]:      #automatic_memory_management        "自动内存管理"
+[balloon_driver]:                   #balloon_driver                     "膨胀驱动程序"
+[virtualization]:                   #virtualization                     "虚拟化"
+[guest]:                            #guest                              "客户应用程序"
+[hypervisor]:                       #hypervisor                         "虚拟机管理程序"
+[control_flow_graph]:               #control_flow_graph                 "控制流图"
+[benchmark_driver]:                 #benchmark_driver                   "基准测试驱动"
+[biased_locking]:                   #biased_locking                     "偏向锁"
+[lazy_unlocking]:                   #lazy_unlocking                     "延迟解锁"
+[bytecode]:                         #bytecode                           "字节码"
+[bytecode_interpertation]:          #bytecode_interpertation            "字节码解释执行"
+[call_profiling]:                   #call_profiling                     "调用分析"
+[card]:                             #card                               "卡"
+[write_barrier]:                    #write_barrier                      "写屏障"
+[generational_garbage_collection]:  #generational_garbage_collection    "分代式垃圾回收"
+[card_table]:                       #card_table                         "卡表"
+[class_block]:                      #class_block                        "类块"
+[object_header]:                    #object_header                      "对象头"
+[class_garbage_collection]:         #class_garbage_collection           "类型垃圾回收"
+[client_side_template]:             #client_side_template               "客户端模板"
+[server_side_template]:             #server_side_template               "服务器端模板"
+[optimization_queue]:               #optimization_queue                 "优化队列"
+[code_generation_queue]:            #code_generation_queue              "代码生成队列"
