@@ -146,6 +146,51 @@ JRockit Mission Control的客户端模板用于控制运行时记录的事件设
 
 >参见[优化队列][optimization_queue]。
 
+<a name="color" />
+## 着色（color）
+
+在本书中，着色是指对具有某种特性节点进行标记，常用于寄存器分配算法或引用追踪垃圾回收算法。
+
+在寄存器分配算法中，同时正在使用的变量可以表示为图中的两个相邻节点，于是寄存器分配算法就可以转化为"如何对图中的节点进行着色，使相邻节点具有不同的颜色"，其中可用颜色的数量等于可用寄存器的数量。
+
+此外，着色还可应用于引用追踪垃圾回收算法。通常情况下，标记-清理算法会使用若干种颜色来标记垃圾回收过程已经处理过的若干种对象。
+
+>参见[寄存器分配][register_allocation]和[引用追踪垃圾回收][tracing_garbage_collection]。
+
+<a name="compaction" />
+## 内存整理（compaction）
+
+内存整理可用于降低堆的碎片化程度。经过内存整理后，对象会被移动到一起，形成一块大的存活区域，消除内存碎片。对整个堆做内存整理操作，往往需要暂停应用程序线程。
+
+>参见[碎片化][fragmentation]。
+
+<a name="CAS" />
+## 比较并交换（compare and swap, CAS）
+
+目前很多CPU架构都支持原子指令，例如x86平台的`cmpxchg`指令和SPARK平台的`cas`指令，这种指令会比较内存和寄存器中的值，若相匹配，则用预设的某个值来覆盖内存中的值。如果覆盖成功，则该指令会设置标志寄存器，做分支处理使用。该指令常用于实现自旋锁。
+
+>参见[原子指令][atomic_instruction]和[自旋锁][spinlock]。
+
+<a name="compressed_reference" />
+## 压缩引用（compressed reference）
+
+引用压缩是一种Java对象模型的实现机制，在这种机制下，应用程序中对象的引用会比系统级的指针小。例如，在64位系统上，如果Java堆小于4GB，则记录对象地址只需32位就够了，在运行时中使用64位完全是浪费。载入/解压缩Java对象的指针会有一点开销（不过并不大），但却可以极大的提升系统的运行速度。
+
+>参见[引用压缩][reference_compression]和[引用解压缩][reference_decompression]。
+
+<a name="concurrent_garbage_collection" />
+## 并发垃圾回收（concurrent garbage collection）
+
+在本书中，并发垃圾回收是指在垃圾回收周期的大部分时间内，Java应用程序还可以继续执行的垃圾回收算法。
+
+>参见[并行垃圾回收][parallel_garbage_collection]See also Parallel garbage collection.
+
+<a name="conservative_garbage_collection" />
+## 保守式垃圾回收(conservative garbage collection)
+
+保守式垃圾回收会将所有有可能是对象的内容都当作对象来处理，之所以这样是因为它不会记录对象的元信息。这种实现方式会降低垃圾回收的执行效率，因为没有元信息，垃圾回收器不得不做一些额外的检查。例如，数字17不是一个对象指针，因为它不在堆空间内，而数字0x471148则有可能是一个对象指针，但也有可能只是个常量值。如果某个常量碰巧指向了堆中的某个对象，则保守式垃圾回收很有可能会把这个常量也当作对象而保留下来。这些特性决定了保守式垃圾回收在移动对象时会受到很大的限制。
+
+>参见[准确式垃圾回收][exact_garbage_collection] [活动对象图][livemap]和[安全点][safepoint]。
 
 
 
@@ -186,3 +231,18 @@ JRockit Mission Control的客户端模板用于控制运行时记录的事件设
 [server_side_template]:             #server_side_template               "服务器端模板"
 [optimization_queue]:               #optimization_queue                 "优化队列"
 [code_generation_queue]:            #code_generation_queue              "代码生成队列"
+[color]:                            #color                              "着色"
+[register_allocation]:              #register_allocation                "寄存器分配"
+[tracing_garbage_collection]:       #tracing_garbage_collection         "引用追踪垃圾回收"
+[compaction]:                       #compaction                         "内存整理"
+[fragmentation]:                    #fragmentation                      "碎片化"
+[spinlock]:                         #spinlock                           "自旋锁"
+[compressed_reference]:             #compressed_reference               "压缩引用"
+[reference_compression]:            #reference_compression              "引用压缩"
+[reference_decompression]:          #reference_decompression            "引用解压缩"
+[concurrent_garbage_collection]:    #concurrent_garbage_collection      "并发垃圾回收"
+[parallel_garbage_collection]:      #parallel_garbage_collection        "并行垃圾回收"
+[conservative_garbage_collection]:  #conservative_garbage_collection    "保守式垃圾回收"
+[exact_garbage_collection]:         #exact_garbage_collection           "准确式垃圾回收"
+[livemap]:                          #livemap                            "活动对象图"
+[safepoint]:                        #safepoint                          "安全点"
