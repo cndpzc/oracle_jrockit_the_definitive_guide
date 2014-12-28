@@ -183,7 +183,7 @@ JRockit Mission Control的客户端模板用于控制运行时记录的事件设
 
 在本书中，并发垃圾回收是指在垃圾回收周期的大部分时间内，Java应用程序还可以继续执行的垃圾回收算法。
 
->参见[并行垃圾回收][parallel_garbage_collection]See also Parallel garbage collection.
+>参见[并行垃圾回收][parallel_garbage_collection]。
 
 <a name="conservative_garbage_collection" />
 ## 保守式垃圾回收(conservative garbage collection)
