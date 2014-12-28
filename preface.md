@@ -31,7 +31,7 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 希望本书能对你有所帮助。
 
 
-## 章节内容
+# 章节内容
 
 * **[第1章：起步][1]**    这一章对JRockit和JRockit Mission Control做了简要介绍，其内容包括如何获得相关软件及软件对各平台的支持情况。本章中的内容还包括在切换到JVM厂商的产品时所需要注意的问题，JRockit和JRockit Mission Control中版本号的命名规范，以及如何获取更多相关内容。
 * **[第2章：自适应代码生成][2]**    在该章中将会对自适应运行时环境中的代码生成做简要介绍。主要内容包括，为什么在JVM中实现自适应代码生成更有难度，而其实现所能发挥的功效却更加强大；JVM针对性能优化所采取的措施；用一个例子对JRockit的代码生成和优化流水线进行介绍；对自适应代码生成和传统代码生成这两种方案的优劣做简单讨论；介绍如何使用命令行选项（flags）和指导文件（directive files）来控制JRockit的代码生成策略。
@@ -47,6 +47,90 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 * **[第12章 JRockit Management API][12]** 这一章中介绍了如何编程实现对JRockit JVM内部功能的访问。JRockit Mission Control套件就是基于此Management API实现的。尽管该章中介绍的JMAPI和JMXMAPI并未得到完整的官方支持，但从中还是可以了解到一些JVM的工作机制。希望读者可以实际动手操练一下以加深理解。
 * **[第13章：JRockit Virtual Edtion][13]** 这一章对现代云环境中的虚拟化进行了介绍，主要内容包括了JRockit Virtual Edition产品的相关概念和具体细节。通常来说，操作系统很重要，但对于JRockit Virtual Edition来说，移除软件栈中的操作系统层并不是什么大问题，而且移除之后还可以降低操作系统层所带来的性能开销。在该章的末尾，还对虚拟化Java运行时环境的发展方向做了简单介绍。
 
+# 读书之前的准备工作
+
+请正确安装JRockit JVM和运行时环境。为了更好的理解本书的内容，请使用JRockit R28及其之后的版本，当然使用JRockit R27也是可以的。此外，安装Eclipse for RCP/Plug-in Developer也是很有用的，尤其是在介绍扩展JRockit Mission Control部分的内容时，动手实践一下很有必要。
+
+# 目标读者
+
+本书面向所有以Java编程语言为工作中心的开发人员和系统管理员。本书分为3大部分。
+
+第一部分着重介绍了JVM和自适应运行时的工作原理，包括自适应运行时的优势和劣势，并以JRockit为例专门介绍到底什么是好的Java代码。深入到JVM这个黑盒中，使读者可以审视运行Java应用程序时，JVM会提供哪些关键运行时数据。理解第一部分的内容可以帮助开发人员和架构设计者更好的指定决策。这部分也可以看作是高校中有关姿势运行时的学习资料。
+
+第二部分着重介绍了JRockit Mission Control套件的具体功能，以及如何使用JRockit Mission Control套件来查找应用程序的性能瓶颈。对于想要对JRockit系统做性能调优的系统管理员和开发人员来说，这部分内容非常有用。但应该记住的是，对JVM层面的调优也就这么多了，对应用程序本身的业务逻辑和具体实现做调优其实是更简单更有效的。
+
+第三部分（也就是[第13章][13]）对新近的、以及还未发布的JRockit相关技术做了介绍，主要面向对Java技术发展方向比较感兴趣的读者。这部分内容着重对Java虚拟化进行讲解。
+
+最后，列出了本书中所引用的[参考文献][14]和[术语汇编][15]。
+Finally, there is a bibliography and a glossary of all technical terms used in the book.
+
+# 内容约定
+
+在本书中会包含一些代码，包括Java代码、命令行和伪代码等，它们均以等宽字体显示。
+
+一些短小精悍的补充说明信息，会以斜体字显示。
+
+>斜体字的内容是很重要的哦。（译者注：译者自己写的不包括在内哦。）
+
+技术名词和基本概念会作为关键字高亮显示。为便于查询，这些技术名词会罗列在[术语汇编][15]中。
+
+在本书中，`JROCKIT_HOME`和`JAVA_HOME`表示JRockit JDK/JRE的安装目录，例如，默认安装JRockit之后，`java`命令的位置是：
+
+    C:\jrockits\jrockit-jdk1.5.0_17\bin\java.exe
+
+而`JROCKIT_HOME`和`JAVA_HOME`的值则为
+
+    C:\jrockits\jrockit-jdk1.5.0_17\
+
+JRockit JVM有其自己的版本号，目前最新的版本是R28。JRockit的次版本号表示在发行主版本后的第几次发行小版本。例如，R27.1和R27.2。在本书中，使用R27.x表示所有R27版本，R28.x表示所有的R28版本。
+
+默认情况下，本书所介绍的内容是以R28版本来基础的，若是针对其他版本的内容，会在内容中提前说明。
+
+>JRockit Mission Control客户端的版本更加标准，例如4.0。在介绍JRockit Mission Control的相关工具时，工具的版本号3.x和4.0也分别对应了JRockit Mission Control客户端的版本。在本书写作时，JRockit Mission Control客户端的最新版本是4.0，除非特别指明，所有内容均是以此版本为基础来讲解的。
+
+书中内容有时会涉及到一些第三方产品，在阅读过程中，读者无需提前精通这些产品，直接阅读相关内容即可。涉及到的第三方产品包括：
+
+* Oracle WebLogic Server: Oracle J2EE应用服务器，[http://www.oracle.com/weblogicserver][16]
+* Oracle Coherence: Oracle内存型分布式缓存技术，[http://www.oracle.com/technology/products/coherence/index.html][17]
+* Oracle Enterprise Manager: Oracle应用程序管理套件，[http://www.oracle.com/us/products/enterprise-manager/index.htm][18]
+* Eclipse: Java IDE(也可用于其他语言的开发)，[http://www.eclipse.org][19]
+* HotSpot: 一种JVM实现，[http://java.sun.com/products/hotspot][20]
+
+有关这些产品的详细内容，请参见链接中的内容。
+
+# 读者反馈
+
+欢迎读者反馈对本书的看法，喜欢的、不喜欢的都可以，这对书籍编写来说非常重要。
+
+发送反馈信息，可以寄直接给[feedback@packtpub.com][21]发邮件，说明具体反馈意见即可。
+
+如果你喜欢本书想买一本的话，请在PacktPub的官网[www.packtpub.com][22]中填写表单，或者发邮件到这个地址[suggest@packtpub.com][23]来说明。
+
+如果读者精于书中的某个领域，并且想贡献一些内容的话，请根据[作者指引][24]中的说明来帮助我们。
+
+# 客户支持
+
+如果你购买了本书，则有很多好处等着你。
+
+>在这里[http://www.packtpub.com/site/default/files/8068_Code.zip][25]可以到下载本书中的示例代码，以及代码的使用说明。
+
+# 勘误
+
+尽管写的很小心，但错误难免。如果读者发现了错误，请告知，感激不尽。这不仅使其他读者免受错误困扰，还可以帮助作为晚上本书的内容。在这里[http://www.packtpub.com/support][26]选择具体的书籍，描述一些错误的具体内容，提及即可。在验证了错误内容后，会在勘误表中做相应的记录。
+
+# 隐私生命
+
+在任何媒体上刊登本书内容均涉及侵权，我们是认真的。如果读者发现有侵权行为，请及时告知我们，我们会及时采取行动的。
+
+若发现侵权行为，请给[copyright@packtpub.com][27]发邮件说明具体情况。
+
+感谢您的帮助，我们会努力写好书来回报您的。
+
+>译者注，翻译是我的错，希望出版社能引进此书。
+
+# 问题
+
+如果读者对本书有任何疑问，请给[questions@packtpub.com][28]发邮件说明，我们会尽力解决。
 
 
 
@@ -54,19 +138,31 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 
 
 
-
-
-
-[1]:    ./chap1/1.md#1      "第1章：起步"
-[2]:    ./chap2/2.md#2      "第2章：自适应代码生成"
-[3]:    ./chap3/3.md#3      "第3章：自适应内存管理"
-[4]:    ./chap4/4.md#4      "第4章：线程与同步"
-[5]:    ./chap5/5.md#5      "第5章：基准测试与性能调优"
-[6]:    ./chap6/6.md#6      "第6章: JRockit Mission Control套件"
-[7]:    ./chap7/7.md#7      "第7章：管理控制台"
-[8]:    ./chap8/8.md#8      "第8章：运行时分析器"
-[9]:    ./chap9/9.md#9      "第9章：飞行记录仪"
-[10]:   ./chap10/10.md#10   "第10章：Memory Leak Detector"
-[11]:   ./chap11/11.md#11   "第11章：JRCMD"
-[12]:   ./chap12/12.md#12   "第12章：JRockit Management API"
-[13]:   ./chap13/13.md#13   "第13章：JRockit Virtual Edtion"
+[1]:    ./chap1/1.md#1                                                      "第1章：起步"
+[2]:    ./chap2/2.md#2                                                      "第2章：自适应代码生成"
+[3]:    ./chap3/3.md#3                                                      "第3章：自适应内存管理"
+[4]:    ./chap4/4.md#4                                                      "第4章：线程与同步"
+[5]:    ./chap5/5.md#5                                                      "第5章：基准测试与性能调优"
+[6]:    ./chap6/6.md#6                                                      "第6章: JRockit Mission Control套件"
+[7]:    ./chap7/7.md#7                                                      "第7章：管理控制台"
+[8]:    ./chap8/8.md#8                                                      "第8章：运行时分析器"
+[9]:    ./chap9/9.md#9                                                      "第9章：飞行记录仪"
+[10]:   ./chap10/10.md#10                                                   "第10章：Memory Leak Detector"
+[11]:   ./chap11/11.md#11                                                   "第11章：JRCMD"
+[12]:   ./chap12/12.md#12                                                   "第12章：JRockit Management API"
+[13]:   ./chap13/13.md#13                                                   "第13章：JRockit Virtual Edtion"
+[14]:   ./appendix_a_bibliography.md                                        "参考文献"
+[15]:   ./appendix_b_glossary.md                                            "术语汇编"
+[16]:   http://www.oracle.com/weblogicserver                                "Oracle J2EE应用服务器"
+[17]:   http://www.oracle.com/technology/products/coherence/index.html      "Oracle内存型分布式缓存技术"
+[18]:   http://www.oracle.com/us/products/enterprise-manager/index.htm      "Oracle应用程序管理套件"
+[19]:   http://www.eclipse.org                                              "Eclipse"
+[20]:   http://java.sun.com/products/hotspot                                "HotSpot"
+[21]:   mailto:feedback@packtpub.com                                        "PacktPub反馈邮箱"
+[22]:   www.packtpub.com                                                    "PacktPub官网"
+[23]:   mailto:suggest@packtpub.com                                         "PacktPub意见信箱"
+[24]:   www.packtpub.com/authors                                            "作者指引"
+[25]:   http://www.packtpub.com/site/default/files/8068_Code.zip            "Oracle权威指南的示例代码"
+[26]:   http://www.packtpub.com/support                                     "PacktPub书籍勘误等级"
+[27]:   mailto:copyright@packtpub.com                                       "PacktPub版权事宜处理邮箱"
+[28]:   questions@packtpub.com                                              "PacktPub问题处理邮箱"
