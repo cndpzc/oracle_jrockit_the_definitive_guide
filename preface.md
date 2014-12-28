@@ -45,6 +45,9 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 * **[第10章 Memory Leak Detector][10]** 在这一章中对JRockit Mission Control套件中的最后一个工具JRockit Memory Leak Detector进行介绍。具体来说，在该章中，介绍了内存泄漏的概念，Memory Leak Detector的适用场景和内部实现。
 * **[第11章 JRCMD][11]** 这一章堆命令行工具JRCMD进行了介绍。通过JRCMD，用户可以操作本机上所有的JVM。在该章用，按字母表顺序列出了JRCMD中最重要的诊断命令，并通过示例讲解介绍了如何使用这些命令。
 * **[第12章 JRockit Management API][12]** 这一章中介绍了如何编程实现对JRockit JVM内部功能的访问。JRockit Mission Control套件就是基于此Management API实现的。尽管该章中介绍的JMAPI和JMXMAPI并未得到完整的官方支持，但从中还是可以了解到一些JVM的工作机制。希望读者可以实际动手操练一下以加深理解。
+* **[第13章：JRockit Virtual Edtion][13]** 这一章对现代云环境中的虚拟化进行了介绍，主要内容包括了JRockit Virtual Edition产品的相关概念和具体细节。通常来说，操作系统很重要，但对于JRockit Virtual Edition来说，移除软件栈中的操作系统层并不是什么大问题，而且移除之后还可以降低操作系统层所带来的性能开销。在该章的末尾，还对虚拟化Java运行时环境的发展方向做了简单介绍。
+
+
 
 
 
@@ -65,4 +68,5 @@ JRockit的相关工作越来越多。2001年的时候，处理咨询业务的工
 [9]:    ./chap9/9.md#9      "第9章：飞行记录仪"
 [10]:   ./chap10/10.md#10   "第10章：Memory Leak Detector"
 [11]:   ./chap11/11.md#11   "第11章：JRCMD"
-[12]:   ./chap11/11.md#11   "第11章："
+[12]:   ./chap12/12.md#12   "第12章：JRockit Management API"
+[13]:   ./chap13/13.md#13   "第13章：JRockit Virtual Edtion"
