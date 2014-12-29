@@ -192,6 +192,53 @@ JRockit Mission Control的客户端模板用于控制运行时记录的事件设
 
 >参见[准确式垃圾回收][exact_garbage_collection] [活动对象图][livemap]和[安全点][safepoint]。
 
+<a name="constant_pool" />
+## 常量池（constant pool）
+
+常量池是class文件中的一部分，其中存储了方法所使用到的常量字符串的较大的数字。
+
+<a name="continuous_JRA" />
+## 持续型JRA
+
+持续型JRA，表示记录任务会一直持续运行，是早期开发JRA时的概念，后来JRA被JFR所取代。
+
+>参见[JFR][JFR]。
+
+<a name="control_flow_graph" />
+## 控制流图（control flow graph，CFG）
+
+控制流图是一种程序表示方式，在其中以图的形式展示了程序可能具有的执行路径（通常会以基本块作为节点）。图中节点之间的边可以表示直接跳转（如`goto`）、条件跳转、转换表（table switch）等，
+
+>参见[偏向锁][biased_locking]。
+
+<a name="cpu_profiling" />
+## CPU分析（cpu profiling）
+
+CPU分析是JRockit Management Console中的一项功能，可以显示出每个线程的CPU使用情况。
+
+<a name="critical_section" />
+## 临界区（critical section）
+
+临界区是指只能被单线程运行的代码片段。实现的时候，一般会在临界区前后用锁（例如同步块）来控制多线程访问。
+
+<a name="dead_code" />
+## 死代码（dead code）
+
+死代码是指应用程序中永远也不会被执行的代码。如果编译器能正确某段代码确实是死代码，则编译器通常会删除这段死代码。
+
+<a name="deadlock" />
+## 死锁（deadlock）
+
+死锁是指，两个线程都因等待对方释放自己需要的资源而被阻塞住。相关线程自己是无法解锁的，只能永远等下去。虽然不消耗CPU资源，但死锁依然是很严重的问题
+
+>参见[胖锁][fat lock]和[活锁][livelock]。
+
+<a name="deadlock_detection" />
+## 死锁检测（deadlock detection）
+
+死锁检测是JRockit Management Console的一项功能，用于检测系统中是否存在死锁的线程。
+
+>参见[死锁][deadlock]。
 
 
 [AST]:                              #AST                                "抽象语法树"
@@ -246,3 +293,12 @@ JRockit Mission Control的客户端模板用于控制运行时记录的事件设
 [exact_garbage_collection]:         #exact_garbage_collection           "准确式垃圾回收"
 [livemap]:                          #livemap                            "活动对象图"
 [safepoint]:                        #safepoint                          "安全点"
+[constant_pool]:                    #constant_pool                      "常量池"
+[continuous_JRA]:                   #continuous_JRA                     "持续型JRA"
+[cpu_profiling]:                    #cpu_profiling                      "CPU分析"
+[critical_section]:                 #critical_section                   "临界区"
+[dead_code]:                        #dead_code                          "死代码"
+[deadlock]:                         #deadlock                           "死锁"
+[fat_lock]:                         #fat_lock                           "胖锁"
+[livelock]:                         #livelock                           "活锁"
+[deadlock_detection]:               #deadlock_detection                 "死锁检测"
