@@ -8,6 +8,7 @@ README
 
 # Contributor
 
+* [caoxudong][3]
 * [wyue99][2]
 
 
@@ -16,3 +17,4 @@ README
 
 [1]:    http://www.amazon.com/Oracle-JRockit-The-Definitive-Guide/dp/1847198066/ref=sr_1_1?ie=UTF8&qid=1373331499&sr=8-1&keywords=oracle+jrockit+the+definitive+guide
 [2]:    https://github.com/wyue99
+[3]:    https://github.com/caoxudong
