@@ -240,6 +240,105 @@ CPU分析是JRockit Management Console中的一项功能，可以显示出每个
 
 >参见[死锁][deadlock]。
 
+<a name="design_mode" />
+## 设计模式（design mode）
+
+在运行JFR客户端时，设计模式是禁用的。通过设计模式可以直接访问构建用户界面的各种工具，自定义GUI界面，并将之导出为插件供他人使用。
+
+>参见[运行模式][run_mode]。
+
+<a name="deterministic_garbage_collection" />
+## 确定式垃圾回收（deterministic garbage collection）
+
+在本书中，确定式垃圾回收是指JRockit Real Time所使用的低延迟垃圾回收器。
+
+>参见[延迟][latency]和[软实时][soft_real_time]。
+
+<a name="diagnostic_command" />
+## 诊断命令
+
+通过JRCMD、MBean`DiagnosticCommand`或JMAPI可以给JRockit JVM发送指定的诊断命令。
+
+>参见[JRCMD][JRCMD]和[JMAPI][JMAPI]。
+
+<a name="double_checked_locking" />
+## 双检查锁（double-checked locking）
+
+在双检查锁中，在获取锁之前会先进行一次检查是否满足条件，以期避免执行开销较大的加锁操作。强烈建议不要使用这种"技巧"，在某些内存模型下，这种"技巧"可能具有不同的行为，甚至是错误的行为。
+
+>参见[Java内存模型][JMM]。
+
+<a name="driver" />
+## 驱动程序（driver）
+
+>参见[基准测试驱动][benchmark_driver]。
+
+<a name="editor" />
+## 编辑器（editor）
+
+编辑器是富客户端平台（RCP）的基本概念，在GUI中，它通常位于RCP应用程序的中间部分，展示相关数据。
+
+>参见[富客户端平台][RCP]。
+
+<a name="escape_analysis" />
+## 逃逸分析（escape_analysis）
+
+逃逸分析是一种代码优化手段，用于判断指定对象的作用域，并在可能情况下移除不必要的对象。如果编译器能证明，对象的作用域之间某个有限范围内，绝对不会"逃逸"出这个范围（例如某个对象是作为参数被传入到方法中），则编译器就可以省去为对象分配内存的操作，直接将对象属性保存到局部变量。逃逸分析与C++中在栈中分配对象有异曲同工之妙。
+
+<a name="event" />
+## 事件（event）
+
+在JRA延迟分析工具和JFR中，事件是与某个时间点相关的数据集合。事件可以有持续时间属性和事件类型属性。
+
+>参见[事件类型][event_type]。
+
+<a name="event_attribute" />
+## 事件属性（event attribute）
+
+事件包含了一系列属性-值得组合，事件属性也称为事件域。
+
+>参见[事件域][event_field]。
+
+<a name="event_field" />
+## 事件域（event field）
+
+>参见[事件属性][event_attribute]。
+
+<a name="event_settings" />
+## 事件配置（event settings）
+
+事件配置包括事件类型、阈值和是否记录调用栈等内容。
+
+>参见[客户端模板][client_side_template]和[服务器端模板][server_side_template]。
+
+<a name="event_type" />
+## 事件类型（event type）
+
+事件类型用于描述JFR中的事件，包含了与事件域、事件路径、事件名和描述等元信息。事件类型和事件的关系就好像是类和实例的关系。
+
+<a name="exact_garbage_collection" />
+## 准确式垃圾回收（exact_garbage_collection）
+
+与保守式垃圾回收相反，准确式垃圾回收要求运行时提供元数据信息，以便明确知道寄存器和栈帧中的哪些位置存储了对象指针，这样就免去了垃圾回收器猜测数据到底是不是对象指针的麻烦。元数据虽然增加了内存消耗，却可以加快垃圾回收的执行速度，并提升回收操作的准确性。
+
+>参见[保守式垃圾回收][conservative_garbage_collection]。
+
+<a name="exact_profiling" />
+## 准确分析（exact profiling）
+
+准确分析是指以注入代码的形式来获取准确的分析结果，例如方法执行时间和方式执行次数。这种方式通常都会带来一点性能开销。
+
+>参见[采样分析][sample_based_profiling]。
+
+<a name="extension_point" />
+## 扩展点（extension point）
+
+在Eclipse Equinox(OSGi)中，插件可以通过扩展点为应用程序增加新功能。例如，在JRockit Management Console中，第三方插件可以通过扩展点来增加新的标签页。
+
+
+
+
+
 
 [AST]:                              #AST                                "抽象语法树"
 [IR]:                               #IR                                 "中间表示"
@@ -302,3 +401,26 @@ CPU分析是JRockit Management Console中的一项功能，可以显示出每个
 [fat_lock]:                         #fat_lock                           "胖锁"
 [livelock]:                         #livelock                           "活锁"
 [deadlock_detection]:               #deadlock_detection                 "死锁检测"
+[design_mode]:                      #design_mode                        "设计模式"
+[run_mode]:                         #run_mode                           "运行模式"
+[deterministic_garbage_collection]: #deterministic_garbage_collection   "确定式垃圾回收"
+[latency]:                          #latency                            "延迟"
+[soft_real_time]:                   #soft_real_time                     "软实时"
+[diagnostic_command]:               #diagnostic_command                 "诊断命令"
+[JRCMD]:                            #JRCMD                              "JRCMD"
+[JMAPI]:                            #JMAPI                              "JMAPI"
+[JMM]:                              #JMM                                "Java内存模型"
+[double_checked_locking]:           #double_checked_locking             "双检查锁"
+[driver]:                           #driver                             "驱动程序"
+[editor]:                           #editor                             "编辑器"
+[RCP]:                              #RCP                                "富客户端平台"
+[escape_analysis]:                  #escape_analysis                    "逃逸分析"
+[event]:                            #event                              "事件"
+[event_type]:                       #event_type                         "事件类型"
+[event_attribute]:                  #event_attribute                    "事件属性"
+[event_field]:                      #event_field                        "事件域"
+[event_settings]:                   #event_settings                     "事件配置"
+[exact_profiling]:                  #exact_profiling                    "准确分析"
+[sample_based_profiling]:           #sample_based_profiling             "采样分析"
+[extension_point]:                  #extension_point                    "扩展点"
+
