@@ -482,6 +482,178 @@ HIR是JRockit中将字节码转换为本地代码过程中的首份产出。JRoc
 
 >另见[虚拟化][virtualization] [客户应用程序][guest] [本地型虚拟机管理程序][native_hypervisor]和[托管型虚拟机管理程序][hosted_hypervisor]。
 
+<a name="inline" />
+## 内联（inline）
+
+内联始终代码优化手段，通过将被调用函数的代码拷贝到调用函数中以节省函数调用所带来的开销。做得好的话，威力强大；但如果过度优化，或者函数调用频率太低，则可能会带来诸如指令缓存失效的问题。
+
+<a name="IR" />
+## 中间表示（intermediate representation，IR）
+
+中间表示是代码在编译器内部的表示形式。通常情况下，中间表示既不是编译语言，也不是本地代码，而是介于两者之间的、更具通用性的表示形式，格式良好的中间表示应该是便于优化和转换的。在JRockit中，中间表示本书也分为多个层次，最上层表示与Java代码类似，最下层表示则更像本地代码，算是一种标准划分形式。
+
+>另见[HIR][HIR] [MIR][MIR] [LIR][LIR] [寄存器分配][register_allocation]和[本地代码][native_code]。
+
+<a name="internal_pointer" />
+## 内部指针（internal pointer）
+
+在本书中，内部指针是指带有偏移的Java对象引用，这样就可以直接指向对象本身，而不是位于对象地址开始处的对象头。尽管垃圾回收器需要对内部指针做特殊处理，但内部指针对于生成高性能代码确实非常重要的，例如实现数组遍历时，直接使用对象原始地址是很不方便的。此外，对于某些有限寻址模式的平台（例如IA-64）来说，使用内部指针是必须的。
+
+<a name="invocation_counter" />
+## 调用计数器（invocation counter）
+
+调用计数器是一种用来检测热点代码的分析工具。通常情况下，调用计数器是将分析代码注入到方法头中，于是乎在调用目标方法时会先将调用计数器加1。自适应运行时通常会扫描调用计数器，并对那些调用次数达到了阈值的方法重新进行优化。在热点检测方面，调用计数器的粒度还略有些粗放，需要配合其他其他检测机制（例如线程采样）一起使用。
+
+>另见[准确分析][exact_profiling]和[线程采样][thread_sampling]。
+
+<a name="java_bytecode" />
+## Java字节码（java bytecode）
+
+>另见[字节码][bytecode]。
+
+<a name="JMM" />
+## Java内存模型（Java Memory Model，JMM）
+
+Java是一种平台无关的编程语言，因此需要保证同一份Java代码在不同CPU架构上也能具有相同的行为。如果将字节码的载入（load）和存储(store)操作映射到本地代码的载入（load）和存储(store)操作，则Java程序可能会在不同的CPU架构上表现出不同点行为。究其原因，就在于不同CPU架构之间可能使用不同的内存访问模型。
+
+为了保证Java程序能够在所有CPU架构上具有相同的内存操作行为，JMM出现了，明确规范了Java中的内存访问语义。在Java诞生之初，JMM还很矬，在经过JSR-133之后，终于实现了语义的一致性。
+
+>另见[JSR-133][JSR-133]
+
+<a name="JIT_compilation" />
+## 即时编译（just-in-time compilation，JIT compilation）
+
+即时编译是指在首次调用某个方法之前，先将之编译为本地代码的过程。
+
+>另见[静态编译][static_compilation]和[预编译][ahead_of_time_compilation]。
+
+<a name="JMAPI" />
+## JMAPI
+
+JMAPI，即JRockit Management API，是一套私有的JVM管理API，用于监控JVM运行状态，并允许在运行过程中修改JVM的行为。在业界标准出现之前，这套API首先给出了对JVM做监控和动态调整的解决方案。在JRockit R28版本中，JMAPI的部分内容已经被废弃掉，转而通过JMXMAPI来完成相应的功能。
+
+>另见[JMXMAPI][JMXMAPI]。
+
+<a name="JMX" />
+## JMX
+
+JMX，即Java Management Extensions，是一套对Java应用程序进行监控/管理的标准接口。
+
+>另见[MBean][MBean]。
+
+<a name="JMXMAPI" />
+## JMXMAPI
+
+JSR-174为JVM引入了基于JMX的标准管理API，JMXMAPI则是JRockit对JSR-174的扩展实现。JMXMAPI中包含的MBean暴露出了JRockit的专属行为，可以在JRockit Mission Control中调用相关操作，读写相关属性。在JRockit中，JMXMAPI实在JRockit R27版本中出现的，但到目前为止还没有得到官方支持，将来的版本中可能会发生变化。
+
+>另见[JMX][JMX] [JSR-174][JSR-174]和[MBean][MBean]。
+
+<a name="JRCMD" />
+## JRCMD
+
+JRCMD（JRockit CoManD）是一个随JRockit运行时一同发行的命令工具，可以向运行在本地的JRockit实例发送诊断命令。安装JRockit运行时后，可以在`JROCKIT_HOME/bin`目录下找到JRCMD。
+
+>另见[诊断命令][diagnostic_command]。
+
+<a name="JRockit" />
+## JRockit
+
+实际上，JRockit是一组技术的统称，其主旨是为了提升Java应用程序的性能和可管理性。JRockit技术组主要包括了JRockit Virtual Edition、JRockit Real Time、JRockit Mission Control和旗舰产品JRockit JVM。
+
+<a name="JFR" />
+## JRockit Flight Recorder（JFR）
+
+在JRockit R28/JRockit Mission Control 4.0将其之后版本中，JFR成为了性能分析和问题诊断的主力工具。JFR可以在内存和硬盘中持续记录JVM的运行时数据。
+
+<a name="Memleak" />
+## JRockit Memory Leak Detector（Memleak）
+
+JRockit Memory Leak Detector（也称为Memleak）是JRockit Mission Control套件中的内存泄漏检测工具，用于检测是否存在内存泄漏以及具体形成原因，还可用于获取一些堆分析信息。
+
+<a name="jrockit_mission_control" />
+## JRockit Mission Control（JRMC）
+
+JRockit Mission Control是JRockit中一组管理工具套件，可用于管理、监控、分析运行在JRockit JVM中的应用程序，还以用来追踪应用程序的内存泄漏问题。
+
+>另见[JRockit Memory Leak Detector][Memleak] [JRockit Runtime Analyzer][JRA]和[JRockit Flight Recorder][JFR]。
+
+<a name="JRA" />
+## JRockit Runtime Analyzer（JRA）
+
+JRockit Runtime Analyzer（JRA）是JRockit R27及其之前版本中的主力分析工具。到R27.3版本时，JRA中新增了一个强大的延迟分析器，对于查看应用程序空闲原因非常有用。到JRockit R28版本中，JRA被JFR所取代。
+
+>另见[JRockit Flight Recorder][JFR]。
+
+<a name="JSR" />
+## Java Specification Request（JSR）
+
+对Java及其API的修改是以一种半公开的方式进行的，称为JCP（即Java Community Process）。当需要在Java标准中做某些修改时，会先将修改内容写成JSR提交给JCP进行投票。众所周知修改，如JMM（JSR-133）和对动态语言的支持（JSR-292），都是JSR的形式提交的。
+
+<a name="JSR-133" />
+## JSR-133
+
+JSR-133旨在解决因CPU架构不同而可能导致的Java应用程序行为不一致的问题。
+
+>另见[JSR][JSR]和[JMM][JMM]。
+
+<a name="JSR-174" />
+## JSR-174
+
+JSR-174用于改进Java运行时的监控和管理特性。JSR-174带来了`java.lang.management`包和平台MBean服务器的概念。从Java5.0起，JSR-174得到了完整实现。
+
+>另见[JSR][JSR]和[MBean服务器][MBean_server]。
+
+<a name="JSR-292" />
+## JSR-292
+
+JSR-292旨在通过修改Java语言和字节码规范来使JVM可以支持动态语言，例如Ruby。
+
+>另见[JSR][JSR]。
+
+<a name="JVM_browser" />
+## JVM浏览器（jvm browser）
+
+JVM浏览器是JRockit Mission COntrol中的一个树形视图，用于展示JRockit Mission Control可以连接到的JVM实例。
+
+>另见[JRockit Mission Control][jrockit_mission_control]。
+
+<a name="keystore" />
+## 私钥仓库（keystore）
+
+密钥仓库用于保存公钥和私钥，使用密码来保证口令来安全性。
+
+>另见[信任库][truststore]。
+
+<a name="lane" />
+## 通道（lane）
+
+在JFR的"Event | Graph"标签页中，通道表示了一条追踪路径，同一父节点下所有的所有事件都会放置在同一个通道中。因此，确保同一父节点下所有事件类型在时间上不重叠可以更好的显式出事件相关性。
+
+>另见[事件][event]。
+
+<a name="large_page" />
+## 大内存页（large page）
+
+大内存页是所有现代操作系统都支持的一种机制，即将内存页的大小提升为MB级别。使用大内存页可以加速转换虚拟地址的速度，因为可以降低TLB（translation lookaside buffer
+）的丢失率；坏处是大幅增加了内存页的大小，可能会造成本地内存的碎片化。
+
+>另见[本地内存][native_memory]。
+
+<a name="latency" />
+## 延迟（latency）
+
+延迟是指执行事务时的开销，而这部分开销对事务本身是没有用的。例如，虚拟机中执行代码生成和内存管理都会带来额外的执行开销，需要开启一个事务来完成。无法预测的延迟会带来不小的麻烦，因为不能预测开销的话，就没办法确定负载等级。有时候，为了能预测延迟，而不得不降低系统总吞吐量。
+
+>另见[Stopping-the-world][STW] [确定式垃圾回收][deterministic_garbage_collection] [并发垃圾回收][concurrent_garbage_collection]和[并行垃圾回收][parallel_garbage_collection]。
+
+<a name="latency_threshold" />
+## 延迟阈值（latency threshold）
+
+JFR中的计时事件中包含了有关超时时间阈值的设定，若是事件的持续时间小于该阈值，则不会记录该时间。
+
+>另见[JRockit Flight Recorder][JFR]。
+
+
 
 [AST]:                              #AST                                "抽象语法树"
 [IR]:                               #IR                                 "中间表示"
@@ -593,4 +765,28 @@ HIR是JRockit中将字节码转换为本地代码过程中的首份产出。JRoc
 [LIR]:                              #LIR                                "低级中间表示"
 [native_code]:                      #native_code                        "本地代码"
 [hosted_hypervisor]:                #hosted_hypervisor                  "托管型虚拟机管理程序"
-[native_hypervisor]：               #native_hypervisor                  "本地型虚拟机管理程序"
+[native_hypervisor]:                #native_hypervisor                  "本地型虚拟机管理程序"
+[inline]:                           #inline                             "内联"
+[internal_pointer]:                 #internal_pointer                   "内部指针"
+[invocation_counter]:               #invocation_counter                 "调用计数器"
+[exact_profiling]:                  #exact_profiling                    "准确分析"
+[thread_sampling]:                  #thread_sampling                    "线程采样"
+[java_bytecode]:                    #java_bytecode                      "Java字节码"
+[JIT_compilation]:                  #JIT_compilation                    "即时编译"
+[JMXMAPI]:                          #JMXMAPI                            "JMXMAPI"
+[JSR-133]:                          #JSR-133                            "JSR-133"
+[JSR-134]:                          #JSR-134                            "JSR-134"
+[JSR-292]:                          #JSR-292                            "JSR-292"
+[JRCMD]:                            #JRCMD                              "JRCMD"
+[JRockit]:                          #JRockit                            "JRockit"
+[Memleak]:                          #Memleak                            "JRockit Memory Leak Detector"
+[jrockit_mission_control]:          #jrockit_mission_control            "JRockit Mission Control"
+[JRA]:                              #JRA                                "JRockit Runtime Analyzer"
+[JSR]:                              #JSR                                "JSR"
+[MBean_server]:                     #MBean_server                       "MBean服务器"
+[keystore]:                         #keystore                           "密钥库"
+[truststore]:                       #truststore                         "信任库"
+[lane]:                             #lane                               "通道"
+[large_page]:                       #large_page                         "大内存页"
+[STW]:                              #STW                                "Stopping-the-world"
+[latency_threshold]:                #latency_threshold                  "延迟阈值"
