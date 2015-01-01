@@ -8,7 +8,7 @@
 
 Java字节码是非结构化的，其表现力也强于Java源代码，有时候没办法通过Java字节码来生成AST，因此，会使用JRockit IR是以图，而非树，的形式来展现的。
 
->另见[IR][IR]。
+>另见[中间表示][IR]。
 
 <a name="access_file" />
 ## 访问文件（access file）
@@ -466,7 +466,7 @@ GC暂停时间比例是JRockit Mission Control中的一个概念，是指运行�
 
 HIR是JRockit中将字节码转换为本地代码过程中的首份产出。JRockit HR是一个以基本块作为节点的有向控制流图，每个基本块都包含0个或多个操作。JRockit HIR是平台无关的。
 
->另见[MIR][MIR] [LIR][LIR] [IR][IR] [寄存器分配][register_allocation]和[本地代码][native_code]。
+>另见[中级中间表示][MIR] [低级中间表示][LIR] [中间表示][IR] [寄存器分配][register_allocation]和[本地代码][native_code]。
 
 <a name="hosted_hypervisor" />
 ## 托管型虚拟机管理程序（hosted hypervisor）
@@ -492,7 +492,7 @@ HIR是JRockit中将字节码转换为本地代码过程中的首份产出。JRoc
 
 中间表示是代码在编译器内部的表示形式。通常情况下，中间表示既不是编译语言，也不是本地代码，而是介于两者之间的、更具通用性的表示形式，格式良好的中间表示应该是便于优化和转换的。在JRockit中，中间表示本书也分为多个层次，最上层表示与Java代码类似，最下层表示则更像本地代码，算是一种标准划分形式。
 
->另见[HIR][HIR] [MIR][MIR] [LIR][LIR] [寄存器分配][register_allocation]和[本地代码][native_code]。
+>另见[高级中间表示][HIR] [中级中间表示][MIR] [低级中间表示][LIR] [寄存器分配][register_allocation]和[本地代码][native_code]。
 
 <a name="internal_pointer" />
 ## 内部指针（internal pointer）
@@ -653,6 +653,19 @@ JFR中的计时事件中包含了有关超时时间阈值的设定，若是事�
 
 >另见[JRockit Flight Recorder][JFR]。
 
+<a name="lazy_unlocking" />
+## 延迟解锁（lazy unlocking）
+
+延迟解锁，有时也称偏向锁，是一种对锁行为的优化手段，即假设大部分锁都只是线程局部的，没必要频繁的做释放和获取操作。在延迟解锁中，运行时就是在赌"锁会一直保持在线程局部内"。当第一次释放锁时，运行时可能会选择不去释放它，直接跳过释放操作，这样当下次同一个线程再来获取这个锁时，也就不必在做加锁操作了。当然，最坏的情况是，另一个线程试图获取这个实际上并未被释放的锁，这时只能先将锁转换为普通模式的锁，强制释放该锁，带来额外的性能开销。因此， 所示应用程序中线程竞争非常激烈，就不适宜使用延迟解锁。
+
+一般来说，实现延迟解锁时会应用各种启发式算法，使其在不断变化的运行环境中达到更好的执行性能，例如对那些线程竞争太过激烈的对象禁用延迟解锁。
+
+<a name="LIR" />
+## 低级中间表示（low level intermediate representation，LIR）
+
+LIR位于Java代码在JRockit内部表示中的最底层，它包含了类似于硬件寄存器和硬件寻址模式等结构，并且可能会包含分配寄存器的内容。LIR中队寄存器的分配可以直接映射到本地代码或当前CPU架构的寄存器分配操作。
+
+>另见[高级中间表示][HIR] [寄存器分配][register_allocation] [本地代码][native_code]和[中间表示][IR]。
 
 
 [AST]:                              #AST                                "抽象语法树"
