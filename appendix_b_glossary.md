@@ -884,6 +884,20 @@ Java代码混淆是有意对字节码的修改，以便加大逆向工程的难�
 
 栈上替换是一种代码优化技术，即在方法运行过程中就将控制流切换到优化编译之后的新方法上。JRockit本身并不支持OSR，它会等到目标方法执行结束后在进行替换。对于某些写的稀烂的微基准测试来说，这种实现方式是测不出好结果的，但实践证明，不支持OSR并不是什么大问题。
 
+<a name="operative_set" />
+## 操作集（operative set）
+
+在JRockit Mission Control中，操作集是一个用户定义的事件集合，主要用于在不同的标签页之间过滤搜索结果。此外，操作集还可配合关连键来查找与某个事件属性相关联的事件。
+
+>参见[关联键][relational_key]。
+
+<a name="optimization_queue" />
+## 优化队列（optimization queue）
+
+优化队列是JRockit中的一个词儿，是指用于存储代码生成请求的队列。优化器线程会通过该队列获取优化请求，对目标代码进行优化。
+
+>参见[代码生成队列][code_generation_queue]。
+
 
 [AST]:                              #AST                                "抽象语法树"
 [IR]:                               #IR                                 "中间表示"
@@ -1043,3 +1057,5 @@ Java代码混淆是有意对字节码的修改，以便加大逆向工程的难�
 [nursery]:                          #nursery                            "新生代"
 [object_pooling]:                   #object_pooling                     "对象池"
 [OSR]:                              #OSR                                "栈上替换"
+[operative_set]:                    #operative_set                      "操作集"
+[relational_key]:                   #relational_key                     "关联键"
