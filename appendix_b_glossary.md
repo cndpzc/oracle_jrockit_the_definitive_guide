@@ -667,6 +667,85 @@ LIR位于Java代码在JRockit内部表示中的最底层，它包含了类似于
 
 >另见[高级中间表示][HIR] [寄存器分配][register_allocation] [本地代码][native_code]和[中间表示][IR]。
 
+<a name="livelock" />
+## 活锁（livelok）
+
+活锁是指，两个线程都持有对方所需要的资源，同时又都在主动获取对方的资源，这时两个线程均处于活动状态，但却无法再继续执行下去，只会不断尝试获取对方的资源。活锁会浪费大量的CPU资源。
+
+>另见[活锁][Deadlock]。
+
+<a name="livemap" />
+## 活动对象图（livemap）
+
+活动对象图是由编译器生成的元数据信息，记录了寄存器和本地栈帧存储的对象信息。这些信息对于执行准确式垃圾回收是非常有用的。
+
+>另见[准确式垃圾回收][exact_garbage_collection]。
+
+<a name="live_object" />
+## 存活对象（live object）
+
+存活对象是指，从根集合或其他存活对象出发，可以通过引用关系追踪到的对象。"存活（live）"和"使用中（in use）"这两个词往往可以交换使用。被标记为"存活"的对象是不可以被回收掉的。
+
+>另见[根集合][root_set]。
+
+<a name="live_set" />
+## 存活集合（live set）
+
+存活集合通常是指那些存活对象所占据的堆空间。
+
+>另见[存活对象][live_object]。
+
+<a name="live_set_fragmentation" />
+## 存活集合 + 碎片化（live set + fragmentation）
+
+实际上，（存活集合+碎片化）空间就是堆中正在使用的内存空间。在JRockit Mission Control中，这块空间用来表示运行应用程序所需的最小内存空间。
+
+<a name="lock_deflation" />
+## 锁收缩（lock deflation）
+
+锁收缩是指，根据运行时的反馈信息，动态地将胖锁转换为瘦锁。一般情况下，执行锁收缩是因为对目标锁的竞争已经由"竞争激烈"变为"竞争不激烈"了。
+
+>另见[锁膨胀][lock_inflation] [胖锁][fat_lock]和[瘦锁][thin_lock]。
+
+<a name="lock_fusion" />
+## 锁融合（lock fusion）
+
+锁融合是指，将两个需要加锁/解锁操作的区域融合，使用一个锁来管理。若是两个被监视器管理的代码块之间只是一些小量的、无副作用的代码，则可以通过锁融合来剔除不必要的解锁、加锁操作，提升系统的整体性能。
+
+>另见[延迟解锁][lazy_unlocking]。
+
+<a name="lock_inflation" />
+## 锁膨胀（lock inflation）
+
+锁膨胀是指，在根据运行时的反馈信息，动态地将瘦锁升级为胖锁。一般情况下，执行锁膨胀是因为对目标锁的竞争已经由"竞争不激烈"变为"竞争激烈"了。
+
+>另见[锁收缩][lock_deflation] [胖锁][fat_lock]和[瘦锁][thin_lock]。
+
+<a name="lock_pairing" />
+## 锁配对（lock pairing）
+
+虽然在Java源代码中，加锁和解锁操作是自动配对的，胆在Java字节码中，指令`monitorenter`和`monitorexit`并不是自动配对的。因此为了支持某些锁操作，如延迟解锁和递归加锁，代码生成器需要能够自行将加锁和解锁操作配对，这里就涉及到了一个名为"锁符号"的结构，代码生成器通过该锁符号来判断加锁/解锁是否相匹配。
+
+>另见[延迟解锁][lazy_unlocking] [递归加锁][recursive_locking]和[锁符号][lock_token]。
+
+<a name="lock_token" />
+## 锁符号（lock token）
+
+锁符号是用来唯一标识某对加锁/解锁操作的记号，锁配对操作通过该符号来判断加锁/解锁是否相匹配。一般情况下，锁符号总包含了指向Java监视器对象的对象指针，并使用一些标记位来记录当前的加锁情况，如当前是胖还是瘦锁，是否是递归加锁等。如果代码生成器无法找到相匹配的加锁/解锁操作，则会将锁符号标记为"未匹配的（unmathed）"，这种情况下虽说比较少见，但确实是可能存在的，因为字节码的表达本就更加自由，当然，相比于正常的、匹配的锁符号来说，未匹配的锁符号在执行同步操作时，效率更低一些。
+
+>另见[锁配对][lock_pairing]。
+
+<a name="lock_word" />
+## 锁字（lock word）
+
+锁字是对象头中的一些标记位，记录了对指定对象加锁情况。在JRockit中，还会将一些垃圾回收信息记录到锁字中。
+
+>另见[对象头][object_header]。
+
+
+
+
+
 
 [AST]:                              #AST                                "抽象语法树"
 [IR]:                               #IR                                 "中间表示"
@@ -803,3 +882,12 @@ LIR位于Java代码在JRockit内部表示中的最底层，它包含了类似于
 [large_page]:                       #large_page                         "大内存页"
 [STW]:                              #STW                                "Stopping-the-world"
 [latency_threshold]:                #latency_threshold                  "延迟阈值"
+[live_object]:                      #live_object                        "存活对象"
+[root_set]:                         #root_set                           "根集合"
+[live_set]:                         #live_set                           "存活集合"
+[live_set_fragmentation]:           #live_set_fragmentation             "存活集合 + 碎片化"
+[lock_inflation]:                   #lock_inflation                     "锁膨胀"
+[lock_pairing]:                     #lock_pairing                       "锁配对"
+[recursive_locking]:                #recursive_locking                  "递归加锁"
+[lock_token]:                       #lock_token                         "锁符号"
+[lock_word]:                        #lock_word                          "锁字"
