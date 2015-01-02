@@ -898,6 +898,23 @@ Java代码混淆是有意对字节码的修改，以便加大逆向工程的难�
 
 >参见[代码生成队列][code_generation_queue]。
 
+<a name="out_of_the_box_behavior" />
+## 开箱即用（out of the box behavior）
+
+对于自适应运行时来说，应该是不需要做任何额外配置就可以顺畅运行的，然后无需用户参与，根据运行时的反馈信息做调整运行时的行为，优化堆的大小，从而达到稳定的运行状态。但现实是残酷的，这种好事并不多，因此如何做到开箱即用是一个很热门的研究课题。
+
+<a name="overprovisioning" />
+## 过渡设计（overprovisioning）
+
+过渡设计是指，为了能够应对系统峰值，而使用比实际所需更多的硬件来部署应用程序。
+
+<a name="OS_thread" />
+## 操作系统线程（OS thread）
+
+>参见[本地线程][native_thread]。
+
+
+
 
 [AST]:                              #AST                                "抽象语法树"
 [IR]:                               #IR                                 "中间表示"
@@ -1059,3 +1076,6 @@ Java代码混淆是有意对字节码的修改，以便加大逆向工程的难�
 [OSR]:                              #OSR                                "栈上替换"
 [operative_set]:                    #operative_set                      "操作集"
 [relational_key]:                   #relational_key                     "关联键"
+[out_of_the_box_behavior]:          #out_of_the_box_behavior            "开箱即用"
+[overprovisioning]:                 #overprovisioning                   "过渡设计"
+[OS_thread]:                        #OS_thread                          "操作系统线程"
