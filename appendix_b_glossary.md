@@ -1089,6 +1089,66 @@ Rollforwarding是指，在老版本的JRockit中，通过模拟接下来的几�
 
 >参见[活动对象图][livemap]。
 
+<a name="sample" />
+## 采样（sample）
+
+采样是指以预先设计好的时间间隔来收集相关数据。自适应运行时的基础就是这些高质量的采样数据。
+
+<a name="sample_based_profiling" />
+## 采样分析（sample-based profiling）
+
+采样分析是指根据统计学原理，从所有可能数据或采样数据中，抽取出一部分数据对应用程序进行分析。如果抽取的正确，可以节省不少分析开销。
+
+>参见[准确分析][exact_profiling]。
+
+<a name="semaphore" />
+## 信号量（semaphore）
+
+信号量是一种构建于`wait`和`notify`语义之上的同步机制。Java中的每个对象都有`wait`和`notify`方法。
+
+在同步上下文中执行`wait`方法会使当前进程进入休眠状态，直到接收到唤醒通知。在同步上下文中执行`notify`方法会通知调度器唤醒阻塞在目标监视器上的其他某个线程。Java中的`notifyAll`方法与`wait`方法类似，区别在于`notifyAll`方法会唤醒阻塞在目标监视器上的所有线程，其中一个会获得监视器，其余的线程会再次休眠。`notifyAll`方法可以更好的避免死锁情况的出现，但会带来一点额外的性能消耗。
+
+>参见[死锁][deadlock]和[监视器][monitor]。
+
+<a name="server_side_template" />
+## 服务器端模板（server-side template）
+
+服务器端模板是JSON格式的文件，用于控制JFR中事件设置。
+
+>参见[事件设置][event_settings]和[客户端模板][client_side_template]。
+
+<a name="soft_real_time" />
+## 软实时（soft real-time）
+
+软实时是指需要对系统延迟做某种程度控制的环境，此外，虽说需要控制延迟，但却不需要严格控制每次暂停的时间边界。通常情况下，软实时会涉及到根据延迟来指定服务等级的质量。JRockit Real Time的垃圾回收器所支持的确定式垃圾回收就是软实时的实现。
+
+>参见[硬实时][hard_real_time]。
+
+<a name="soft_reference" />
+## 软引用（soft reference）
+
+软引用是一些垃圾回收器需要特殊对待的对象类型。Java中共有4种类型引用，分别是强引用（strong reference）、软引用（soft reference）、弱引用（weak reference）和虚引用（phantom reference）。当内存不足时，垃圾回收器可以回收掉软引用和弱引用所包装的对象（通常来说，包装对象是一个`Reference`类的实例）。虚引用是个很特殊的存在，它所包装的对象是无法被获取到的，其功能在于实现更安全的"析构函数"（译者注，这里的"析构函数"只是个比喻）。
+
+<a name="software_prefetching" />
+## 软件预抓取（software prefetching）
+
+软件预抓取是指在代码通过显式预抓取指令来实现的预抓取。
+
+>参见[硬件预抓取][hardware_prefetching]和[预抓取][prefetching]。
+
+<a name="spilling" />
+## Spilling
+
+寄存器分配起需要将一大堆变量映射到少量的物理寄存器上。如果同时使用的变量的数目比可用寄存器的数目多的话，就不得不将一些变量先临时存储到内存中，这就是Spilling。通常情况下，会将这些无法同时处理的变量放到生成这些变量的栈帧中。大量使用Spilling技术会带来巨大的性能损耗。
+
+>参见[Spilling][spilling]和[原子指令][atomic_instruction]。
+
+<a name="spinlock" />
+## 自旋锁（spinlock）
+
+自旋锁的实现中通常包含了原子指令和条件跳转，形成一个循环，再完成操作之前，会一直消耗CPU资源。使用自旋锁来实现简单的、没什么竞争的、持有时间也不长的同步锁是挺不错的，不过对于大部分应用程序来说，自旋锁并不是最佳选择。
+
+>参见[瘦锁][thin_lock]和[胖锁][fat_lock]。
 
 
 
@@ -1270,3 +1330,5 @@ Rollforwarding是指，在老版本的JRockit中，通过模拟接下来的几�
 [reference_counting]:               #reference_counting                 "引用计数"
 [role]:                             #role                               "角色"
 [rollforwarding]:                   #rollforwarding                     "Rollforwarding"
+[sample]:                           #sample                             "采样"
+[semaphore]:                        #semaphore                          "信号量"
