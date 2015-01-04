@@ -231,7 +231,7 @@ CPU分析是JRockit Management Console中的一项功能，可以显示出每个
 
 死锁是指，两个线程都因等待对方释放自己需要的资源而被阻塞住。相关线程自己是无法解锁的，只能永远等下去。虽然不消耗CPU资源，但死锁依然是很严重的问题
 
->参见[胖锁][fat lock]和[活锁][livelock]。
+>参见[胖锁][fat_lock]和[活锁][livelock]。
 
 <a name="deadlock_detection" />
 ## 死锁检测（deadlock detection）
