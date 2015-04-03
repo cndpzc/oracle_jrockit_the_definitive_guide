@@ -11,6 +11,7 @@ README
 * [caoxudong][3]
 * [wyue99][2]
 * [AssemblyCoffee][5]
+* [cndpzc][6]
 
 # Acknowledgement
 
@@ -31,3 +32,4 @@ README
 [3]:    https://github.com/caoxudong
 [4]:    http://rednaxelafx.iteye.com/      "RednaxelaFX"
 [5]:    https://github.com/AssemblyCoffee
+[6]:    https://github.com/cndpzc
